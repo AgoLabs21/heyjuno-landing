@@ -11,944 +11,151 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyjuno.de">
 <link rel="canonical" href="https://heyjuno.de">
-
-<!-- Fonts loaded locally for DSGVO compliance – no Google requests -->
-<!-- IMPORTANT: Download Outfit and DM Sans woff2 files to /fonts/ directory -->
-<!-- Get them from: https://fonts.google.com/specimen/Outfit and https://fonts.google.com/specimen/DM+Sans -->
-<!-- For now using font-display:swap with system fallbacks until local fonts are set up -->
 <style>
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 300 800;
-  font-display: swap;
-  src: url('/fonts/Outfit-Variable.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 300 700;
-  font-display: swap;
-  src: url('/fonts/DMSans-Variable.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'DM Sans';
-  font-style: italic;
-  font-weight: 300 700;
-  font-display: swap;
-  src: url('/fonts/DMSans-Italic-Variable.woff2') format('woff2');
-}
-
-:root {
-  --primary: #4A7FC7;
-  --primary-light: #7BA3D9;
-  --primary-dark: #345B94;
-  --secondary: #89CDB5;
-  --secondary-light: #B2E0D0;
-  --accent: #E8C06A;
-  --accent-light: #F2D898;
-  --bg: #F7F9FB;
-  --surface: #FFFFFF;
-  --text: #24364A;
-  --text-muted: #6B7D8F;
-  --text-light: #94A3B3;
-  --border: #E2E8F0;
-  --border-light: #EDF2F7;
-  --error: #C97070;
-  --success: #5BB88A;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --shadow-sm: 0 2px 8px rgba(36,54,74,.04);
-  --shadow-md: 0 4px 20px rgba(36,54,74,.07);
-  --shadow-lg: 0 12px 40px rgba(36,54,74,.1);
-  --shadow-primary: 0 4px 16px rgba(74,127,199,.25);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ═══════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════ */
-
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 100;
-  background: rgba(247,249,251,.88);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(226,232,240,.5);
-  transition: box-shadow .3s, background .3s;
-}
-nav.scrolled {
-  background: rgba(255,255,255,.95);
-  box-shadow: 0 1px 12px rgba(36,54,74,.06);
-}
-.nav-inner {
-  max-width: 1100px; margin: 0 auto; padding: 0 24px;
-  height: 64px; display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo {
-  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 22px;
-  color: var(--primary); text-decoration: none;
-  display: flex; align-items: center; gap: 10px;
-}
-.nav-logo-mark {
-  width: 34px; height: 34px; background: var(--primary); border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-size: 17px; font-weight: 800;
-  box-shadow: 0 2px 8px rgba(74,127,199,.2);
-}
-.nav-links {
-  display: flex; gap: 28px; align-items: center; list-style: none;
-}
-.nav-links a {
-  text-decoration: none; color: var(--text-muted);
-  font-size: 14px; font-weight: 500;
-  transition: color .2s;
-}
-.nav-links a:hover { color: var(--primary); }
-.nav-cta {
-  background: var(--primary) !important; color: #fff !important;
-  padding: 9px 22px; border-radius: var(--radius-sm);
-  font-weight: 600 !important; font-size: 13px !important;
-  transition: all .2s !important;
-  box-shadow: var(--shadow-primary);
-}
-.nav-cta:hover {
-  background: var(--primary-dark) !important;
-  transform: translateY(-1px);
-}
-.nav-toggle {
-  display: none; background: none; border: none;
-  cursor: pointer; padding: 8px;
-}
-.nav-toggle span {
-  display: block; width: 20px; height: 2px;
-  background: var(--text); margin: 5px 0; border-radius: 2px;
-  transition: all .3s;
-}
-
-/* ═══════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════ */
-
-.hero {
-  padding: 140px 24px 60px; text-align: center;
-  position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute;
-  top: -300px; right: -200px;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(74,127,199,.05) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero::after {
-  content: ''; position: absolute;
-  bottom: -200px; left: -150px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(137,205,181,.04) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(74,127,199,.07); color: var(--primary);
-  padding: 7px 18px; border-radius: 100px;
-  font-size: 13px; font-weight: 600;
-  animation: fadeUp .6s ease both;
-}
-.hero h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(34px, 5.5vw, 58px); font-weight: 800;
-  line-height: 1.1; letter-spacing: -1.5px;
-  max-width: 660px; margin: 20px auto 18px;
-  animation: fadeUp .6s ease .1s both;
-}
-.hero h1 .gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero > p {
-  font-size: 17px; color: var(--text-muted);
-  max-width: 500px; margin: 0 auto 32px;
-  line-height: 1.7;
-  animation: fadeUp .6s ease .2s both;
-}
-.hero-buttons {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  animation: fadeUp .6s ease .3s both;
-}
-
-/* ═══════════════════════════════════════════
-   BUTTONS
-   ═══════════════════════════════════════════ */
-
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px; border-radius: var(--radius-md);
-  font-size: 15px; font-weight: 600;
-  text-decoration: none; transition: all .2s;
-  cursor: pointer; border: none; font-family: inherit;
-}
-.btn-primary {
-  background: var(--primary); color: #fff;
-  box-shadow: var(--shadow-primary);
-}
-.btn-primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(74,127,199,.3);
-}
-.btn-outline {
-  background: var(--surface); color: var(--text);
-  border: 1.5px solid var(--border);
-}
-.btn-outline:hover {
-  border-color: var(--primary-light); color: var(--primary);
-}
-
-/* ═══════════════════════════════════════════
-   SHARED SECTION STYLES
-   ═══════════════════════════════════════════ */
-
-.container { max-width: 1100px; margin: 0 auto; }
-.section-label {
-  font-family: 'Outfit', sans-serif;
-  font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 2.5px;
-  color: var(--primary); margin-bottom: 10px;
-}
-.section-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(26px, 3.5vw, 38px); font-weight: 700;
-  line-height: 1.2; margin-bottom: 14px; letter-spacing: -.5px;
-}
-.section-subtitle {
-  font-size: 16px; color: var(--text-muted);
-  max-width: 520px; line-height: 1.7; margin-bottom: 48px;
-}
-
-/* ═══════════════════════════════════════════
-   PROBLEM SECTION
-   ═══════════════════════════════════════════ */
-
-.problem { padding: 80px 24px; background: var(--surface); }
-.problem-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 14px;
-}
-.problem-card {
-  padding: 22px; border-radius: var(--radius-md);
-  background: var(--bg); border: 1px solid var(--border-light);
-  transition: all .25s;
-}
-.problem-card:hover {
-  border-color: rgba(201,112,112,.25);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-.problem-icon { font-size: 24px; margin-bottom: 10px; }
-.problem-card h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px; font-weight: 600; margin-bottom: 4px;
-  color: var(--error);
-}
-.problem-card p {
-  font-size: 13.5px; color: var(--text-muted); line-height: 1.6;
-}
-
-/* ═══════════════════════════════════════════
-   APP PREVIEW (Screenshots)
-   ═══════════════════════════════════════════ */
-
-.app-preview {
-  padding: 80px 24px; background: var(--bg); text-align: center;
-}
-.preview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px; margin-top: 48px;
-  max-width: 900px; margin-left: auto; margin-right: auto;
-}
-.preview-item {
-  position: relative;
-}
-.phone-frame {
-  background: var(--surface);
-  border-radius: 24px;
-  border: 2px solid var(--border);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  aspect-ratio: 9/19.5;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .3s, box-shadow .3s;
-}
-.phone-frame:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(36,54,74,.12);
-}
-.phone-frame img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-.phone-placeholder {
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 8px;
-  color: var(--text-light); font-size: 13px; text-align: center;
-  padding: 16px;
-}
-.phone-placeholder .icon { font-size: 32px; opacity: .4; }
-.preview-label {
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px; font-weight: 600;
-  color: var(--text-muted); margin-top: 12px;
-}
-
-/* ═══════════════════════════════════════════
-   FEATURES
-   ═══════════════════════════════════════════ */
-
-.features { padding: 100px 24px; }
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px; margin-top: 48px;
-}
-.feature-card {
-  background: var(--surface); border-radius: var(--radius-lg);
-  padding: 28px; border: 1px solid var(--border-light);
-  transition: all .3s; position: relative; overflow: hidden;
-}
-.feature-card::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-light));
-  opacity: 0; transition: opacity .3s;
-}
-.feature-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-.feature-card:hover::after { opacity: 1; }
-.feature-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; margin-bottom: 14px;
-}
-.feature-icon.blue { background: rgba(74,127,199,.08); }
-.feature-icon.green { background: rgba(137,205,181,.12); }
-.feature-icon.gold { background: rgba(232,192,106,.12); }
-.feature-icon.teal { background: rgba(91,184,138,.08); }
-.feature-card h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px; font-weight: 600; margin-bottom: 6px;
-}
-.feature-card p {
-  font-size: 14px; color: var(--text-muted); line-height: 1.7;
-}
-.feature-tag {
-  display: inline-block;
-  background: rgba(74,127,199,.07); color: var(--primary);
-  font-size: 11px; font-weight: 600;
-  padding: 3px 10px; border-radius: 6px; margin-top: 10px;
-}
-
-/* ═══════════════════════════════════════════
-   WOCHENBETT HIGHLIGHT
-   ═══════════════════════════════════════════ */
-
-.highlight {
-  padding: 80px 24px;
-  background: linear-gradient(145deg, var(--primary-dark) 0%, var(--primary) 60%, #5A8ED4 100%);
-  color: #fff; position: relative; overflow: hidden;
-}
-.highlight::before {
-  content: ''; position: absolute;
-  top: -40%; right: -15%;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 70%);
-}
-.highlight .section-label { color: rgba(255,255,255,.5); }
-.highlight .section-title { color: #fff; }
-.highlight .section-subtitle { color: rgba(255,255,255,.7); }
-.highlight-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px; margin-top: 40px;
-}
-.highlight-item {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: var(--radius-md); padding: 22px;
-  backdrop-filter: blur(8px);
-  transition: background .2s;
-}
-.highlight-item:hover {
-  background: rgba(255,255,255,.1);
-}
-.highlight-item h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 15px; font-weight: 600; margin-bottom: 5px;
-}
-.highlight-item p {
-  font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.6;
-}
-
-/* ═══════════════════════════════════════════
-   HOW IT WORKS (for Mothers)
-   ═══════════════════════════════════════════ */
-
-.how-it-works {
-  padding: 80px 24px; background: var(--surface);
-}
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px; margin-top: 40px;
-}
-.step-card { text-align: center; }
-.step-number {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(74,127,199,.08); color: var(--primary);
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px;
-}
-.step-card h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px; font-weight: 600; margin-bottom: 6px;
-}
-.step-card p {
-  font-size: 13.5px; color: var(--text-muted); line-height: 1.6;
-  max-width: 240px; margin: 0 auto;
-}
-
-/* ═══════════════════════════════════════════
-   PRICING
-   ═══════════════════════════════════════════ */
-
-.pricing { padding: 80px 24px; text-align: center; }
-.price-card {
-  max-width: 400px; margin: 40px auto 0;
-  background: var(--surface); border-radius: var(--radius-xl);
-  padding: 36px; border: 2px solid var(--primary-light);
-  box-shadow: 0 12px 40px rgba(74,127,199,.08);
-  position: relative;
-}
-.price-badge {
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  background: var(--accent); color: var(--text);
-  font-size: 12px; font-weight: 700;
-  padding: 5px 18px; border-radius: 100px;
-  white-space: nowrap;
-}
-.price-amount {
-  font-family: 'Outfit', sans-serif;
-  font-size: 48px; font-weight: 800;
-  color: var(--primary); margin: 16px 0 2px;
-}
-.price-amount span {
-  font-size: 17px; font-weight: 500; color: var(--text-muted);
-}
-.price-period {
-  font-size: 13px; color: var(--text-muted); margin-bottom: 24px;
-}
-.price-features {
-  text-align: left; list-style: none; margin-bottom: 24px;
-}
-.price-features li {
-  padding: 7px 0; font-size: 14px;
-  display: flex; align-items: center; gap: 10px;
-}
-.price-features li::before {
-  content: '✓'; color: var(--success);
-  font-weight: 700; font-size: 15px; flex-shrink: 0;
-}
-.price-note {
-  font-size: 12px; color: var(--text-light); margin-top: 14px;
-}
-
-/* ═══════════════════════════════════════════
-   TRUST
-   ═══════════════════════════════════════════ */
-
-.trust { padding: 60px 24px; background: var(--bg); }
-.trust-grid {
-  display: flex; justify-content: center;
-  gap: 36px; flex-wrap: wrap; margin-top: 28px;
-}
-.trust-item { text-align: center; }
-.trust-icon { font-size: 26px; margin-bottom: 6px; }
-.trust-item h4 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px; font-weight: 600; margin-bottom: 2px;
-}
-.trust-item p { font-size: 12px; color: var(--text-muted); }
-
-/* ═══════════════════════════════════════════
-   CTA
-   ═══════════════════════════════════════════ */
-
-.cta-section { padding: 80px 24px; text-align: center; background: var(--surface); }
-.cta-section h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(26px, 3.5vw, 36px); font-weight: 700;
-  margin-bottom: 10px;
-}
-.cta-section p {
-  font-size: 16px; color: var(--text-muted);
-  margin-bottom: 28px; max-width: 440px;
-  margin-left: auto; margin-right: auto;
-}
-
-/* ═══════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════ */
-
-footer {
-  padding: 36px 24px; text-align: center;
-  border-top: 1px solid var(--border-light); background: var(--bg);
-}
-footer p { font-size: 13px; color: var(--text-light); }
-footer a { color: var(--text-muted); text-decoration: none; }
-footer a:hover { color: var(--primary); text-decoration: underline; }
-.footer-links {
-  display: flex; justify-content: center;
-  gap: 24px; margin-bottom: 10px;
-  font-size: 13px;
-}
-
-/* ═══════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════ */
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.fade-in {
-  opacity: 0; transform: translateY(16px);
-  transition: all .5s ease;
-}
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════ */
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: block; }
-  .nav-links.open {
-    display: flex; flex-direction: column;
-    position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--surface); padding: 16px 24px 24px;
-    gap: 16px; box-shadow: var(--shadow-lg);
-    border-bottom: 1px solid var(--border-light);
-  }
-  .hero { padding: 120px 20px 50px; }
-  .preview-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px; max-width: 320px;
-  }
-  .features-grid { grid-template-columns: 1fr; }
-  .highlight-features { grid-template-columns: 1fr; }
-  .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .trust-grid { gap: 20px; }
-}
-
-@media (max-width: 480px) {
-  .preview-grid { max-width: 280px; }
-  .steps-grid { grid-template-columns: 1fr; }
-}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:300 800;font-display:swap;src:url('/fonts/Outfit-Variable.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url('/fonts/DMSans-Variable.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:italic;font-weight:300 700;font-display:swap;src:url('/fonts/DMSans-Italic-Variable.woff2') format('woff2')}
+:root{--primary:#4A7FC7;--primary-light:#7BA3D9;--primary-dark:#345B94;--secondary:#89CDB5;--accent:#E8C06A;--gold:#C9A84C;--gold-light:#E8D48B;--gold-dark:#A68A30;--bg:#F7F9FB;--surface:#fff;--text:#24364A;--text-muted:#6B7D8F;--text-light:#94A3B3;--border:#E2E8F0;--border-light:#EDF2F7;--error:#C97070;--success:#5BB88A;--radius-sm:8px;--radius-md:14px;--radius-lg:20px;--radius-xl:28px;--shadow-sm:0 2px 8px rgba(36,54,74,.04);--shadow-md:0 4px 20px rgba(36,54,74,.07);--shadow-lg:0 12px 40px rgba(36,54,74,.1);--shadow-primary:0 4px 16px rgba(74,127,199,.25)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,249,251,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(226,232,240,.5);transition:box-shadow .3s,background .3s}nav.scrolled{background:rgba(255,255,255,.95);box-shadow:0 1px 12px rgba(36,54,74,.06)}.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:var(--primary);text-decoration:none;display:flex;align-items:center;gap:10px}.nav-logo-mark{width:34px;height:34px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;font-weight:800;box-shadow:0 2px 8px rgba(74,127,199,.2)}.nav-links{display:flex;gap:28px;align-items:center;list-style:none}.nav-links a{text-decoration:none;color:var(--text-muted);font-size:14px;font-weight:500;transition:color .2s}.nav-links a:hover{color:var(--primary)}.nav-cta{background:var(--primary)!important;color:#fff!important;padding:9px 22px;border-radius:var(--radius-sm);font-weight:600!important;font-size:13px!important;transition:all .2s!important;box-shadow:var(--shadow-primary)}.nav-cta:hover{background:var(--primary-dark)!important;transform:translateY(-1px)}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}.nav-toggle span{display:block;width:20px;height:2px;background:var(--text);margin:5px 0;border-radius:2px;transition:all .3s}
+.hero{padding:140px 24px 60px;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-300px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(74,127,199,.05) 0%,transparent 70%);pointer-events:none}.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,127,199,.07);color:var(--primary);padding:7px 18px;border-radius:100px;font-size:13px;font-weight:600;animation:fadeUp .6s ease both}.hero h1{font-family:'Outfit',sans-serif;font-size:clamp(34px,5.5vw,58px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;max-width:660px;margin:20px auto 18px;animation:fadeUp .6s ease .1s both}.hero h1 .gradient{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.hero>p{font-size:17px;color:var(--text-muted);max-width:500px;margin:0 auto 32px;line-height:1.7;animation:fadeUp .6s ease .2s both}.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s ease .3s both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius-md);font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:inherit}.btn-primary{background:var(--primary);color:#fff;box-shadow:var(--shadow-primary)}.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,127,199,.3)}.btn-outline{background:var(--surface);color:var(--text);border:1.5px solid var(--border)}.btn-outline:hover{border-color:var(--primary-light);color:var(--primary)}
+.container{max-width:1100px;margin:0 auto}.section-label{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--primary);margin-bottom:10px}.section-title{font-family:'Outfit',sans-serif;font-size:clamp(26px,3.5vw,38px);font-weight:700;line-height:1.2;margin-bottom:14px;letter-spacing:-.5px}.section-subtitle{font-size:16px;color:var(--text-muted);max-width:520px;line-height:1.7;margin-bottom:48px}
+.problem{padding:80px 24px;background:var(--surface)}.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.problem-card{padding:22px;border-radius:var(--radius-md);background:var(--bg);border:1px solid var(--border-light);transition:all .25s}.problem-card:hover{border-color:rgba(201,112,112,.25);transform:translateY(-2px);box-shadow:var(--shadow-sm)}.problem-card h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;margin-bottom:4px;color:var(--error)}.problem-card p{font-size:13.5px;color:var(--text-muted);line-height:1.6}
+.app-preview{padding:80px 24px;background:var(--bg);text-align:center}.preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;max-width:900px;margin-left:auto;margin-right:auto}.phone-frame{background:var(--surface);border-radius:24px;border:2px solid var(--border);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:9/19.5;display:flex;align-items:center;justify-content:center;transition:transform .3s,box-shadow .3s}.phone-frame:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 50px rgba(36,54,74,.12)}.phone-frame img{width:100%;height:100%;object-fit:cover}.phone-placeholder{color:var(--text-light);font-size:13px;text-align:center;padding:16px}.preview-label{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);margin-top:12px}
+.features{padding:100px 24px}.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:48px}.feature-card{background:var(--surface);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--border-light);transition:all .3s;position:relative;overflow:hidden}.feature-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-light));opacity:0;transition:opacity .3s}.feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}.feature-card:hover::after{opacity:1}.feature-card h3{font-family:'Outfit',sans-serif;font-size:18px;font-weight:600;margin-bottom:6px}.feature-card p{font-size:14px;color:var(--text-muted);line-height:1.7}.feature-tag{display:inline-block;background:rgba(74,127,199,.07);color:var(--primary);font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;margin-top:10px}
+.highlight{padding:80px 24px;background:linear-gradient(145deg,var(--primary-dark) 0%,var(--primary) 60%,#5A8ED4 100%);color:#fff;position:relative;overflow:hidden}.highlight::before{content:'';position:absolute;top:-40%;right:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,.04) 0%,transparent 70%)}.highlight .section-label{color:rgba(255,255,255,.5)}.highlight .section-title{color:#fff}.highlight .section-subtitle{color:rgba(255,255,255,.7)}.highlight-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}.highlight-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:22px;backdrop-filter:blur(8px);transition:background .2s}.highlight-item:hover{background:rgba(255,255,255,.1)}.highlight-item h3{font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;margin-bottom:5px}.highlight-item p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6}
+.how-it-works{padding:80px 24px;background:var(--surface)}.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:40px}.step-card{text-align:center}.step-number{width:44px;height:44px;border-radius:50%;background:rgba(74,127,199,.08);color:var(--primary);font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}.step-card h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;margin-bottom:6px}.step-card p{font-size:13.5px;color:var(--text-muted);line-height:1.6;max-width:240px;margin:0 auto}
+.seals{padding:70px 24px;background:var(--bg)}.seals-grid{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:32px}.seal{width:140px;height:140px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.seal-ring{position:absolute;inset:0;border:3px solid var(--gold);border-radius:50%;box-shadow:0 0 0 1px var(--gold-dark),inset 0 0 12px rgba(201,168,76,.15),0 4px 16px rgba(201,168,76,.2);background:linear-gradient(160deg,rgba(232,212,139,.08) 0%,rgba(201,168,76,.04) 100%)}.seal-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px}.seal-icon{width:32px;height:32px;margin-bottom:4px}.seal-icon svg{width:100%;height:100%;stroke:var(--gold-dark);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.seal h4{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.5px;line-height:1.3}.seal p{font-size:10.5px;color:var(--text-muted);line-height:1.3}
+.pricing{padding:80px 24px;text-align:center}.price-card{max-width:400px;margin:40px auto 0;background:var(--surface);border-radius:var(--radius-xl);padding:36px;border:2px solid var(--primary-light);box-shadow:0 12px 40px rgba(74,127,199,.08);position:relative}.price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--text);font-size:12px;font-weight:700;padding:5px 18px;border-radius:100px;white-space:nowrap}.price-amount{font-family:'Outfit',sans-serif;font-size:48px;font-weight:800;color:var(--primary);margin:16px 0 2px}.price-amount span{font-size:17px;font-weight:500;color:var(--text-muted)}.price-period{font-size:13px;color:var(--text-muted);margin-bottom:24px}.price-features{text-align:left;list-style:none;margin-bottom:24px}.price-features li{padding:7px 0;font-size:14px;display:flex;align-items:center;gap:10px}.price-features li::before{content:'';display:inline-block;width:16px;height:16px;flex-shrink:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235BB88A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");background-size:contain;background-repeat:no-repeat}.price-note{font-size:12px;color:var(--text-light);margin-top:14px}
+.cta-section{padding:80px 24px;text-align:center;background:var(--surface)}.cta-section h2{font-family:'Outfit',sans-serif;font-size:clamp(26px,3.5vw,36px);font-weight:700;margin-bottom:10px}.cta-section p{font-size:16px;color:var(--text-muted);margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto}
+footer{padding:48px 24px 36px;text-align:center;border-top:1px solid var(--border-light);background:var(--surface)}.footer-main{max-width:800px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;margin-bottom:28px;text-align:left}.footer-col h5{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}.footer-col a{display:block;font-size:13px;color:var(--text-muted);text-decoration:none;margin-bottom:6px;transition:color .2s}.footer-col a:hover{color:var(--primary)}.footer-col p{font-size:13px;color:var(--text-muted);line-height:1.5}.footer-bottom{border-top:1px solid var(--border-light);padding-top:20px}.footer-bottom p{font-size:12px;color:var(--text-light)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.fade-in{opacity:0;transform:translateY(16px);transition:all .5s ease}.fade-in.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.nav-toggle{display:block}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--surface);padding:16px 24px 24px;gap:16px;box-shadow:var(--shadow-lg);border-bottom:1px solid var(--border-light)}.hero{padding:120px 20px 50px}.preview-grid{grid-template-columns:repeat(2,1fr);gap:12px;max-width:320px}.features-grid{grid-template-columns:1fr}.highlight-features{grid-template-columns:1fr}.steps-grid{grid-template-columns:repeat(2,1fr);gap:16px}.seals-grid{gap:16px}.seal{width:120px;height:120px}.seal h4{font-size:10px}.seal p{font-size:9px}.footer-main{flex-direction:column;text-align:center;align-items:center}}
+@media(max-width:480px){.preview-grid{max-width:280px}.steps-grid{grid-template-columns:1fr}.seal{width:100px;height:100px}}
 </style>
 </head>
 <body>
-
-<!-- ═══════════════════════════════════════════
-     NAVIGATION
-     ═══════════════════════════════════════════ -->
-
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <div class="nav-logo-mark">J</div>
-      HeyJuno
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#wochenbett">Wochenbett</a></li>
-      <li><a href="#so-funktionierts">So geht's</a></li>
-      <li><a href="#preis">Preis</a></li>
-      <li><a href="https://app.heyjuno.de" class="nav-cta">Jetzt starten</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ═══════════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════════ -->
+<nav id="navbar"><div class="nav-inner"><a href="#" class="nav-logo"><div class="nav-logo-mark">J</div>HeyJuno</a><button class="nav-toggle" id="navToggle" aria-label="Menü öffnen"><span></span><span></span><span></span></button><ul class="nav-links" id="navLinks"><li><a href="#features">Features</a></li><li><a href="#wochenbett">Wochenbett</a></li><li><a href="#so-funktionierts">So geht's</a></li><li><a href="#preis">Preis</a></li><li><a href="https://app.heyjuno.de" class="nav-cta">Jetzt starten</a></li></ul></div></nav>
 
 <section class="hero">
-  <div class="hero-badge">Pilotphase – kostenlos testen</div>
-  <h1>Mehr Zeit für die Kleinen,<br><span class="gradient">weniger für den Papierkram.</span></h1>
-  <p>HeyJuno ist die All-in-One App für freiberufliche Hebammen. Kein WhatsApp-Chaos. Alles an einem Ort – DSGVO-konform.</p>
-  <div class="hero-buttons">
-    <a href="https://app.heyjuno.de" class="btn btn-primary">Kostenlos starten →</a>
-    <a href="#features" class="btn btn-outline">Features entdecken</a>
-  </div>
+<div class="hero-badge">Pilotphase – kostenlos testen</div>
+<h1>Mehr Zeit für die Kleinen,<br><span class="gradient">weniger für den Papierkram.</span></h1>
+<p>HeyJuno ist die All-in-One App für freiberufliche Hebammen. Kein WhatsApp-Chaos. Alles an einem Ort – DSGVO-konform.</p>
+<div class="hero-buttons"><a href="https://app.heyjuno.de" class="btn btn-primary">Kostenlos starten</a><a href="#features" class="btn btn-outline">Features entdecken</a></div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     PROBLEM
-     ═══════════════════════════════════════════ -->
+<section class="problem"><div class="container">
+<div class="section-label">Das Problem</div>
+<div class="section-title">Als Hebamme kennst du das.</div>
+<div class="section-subtitle">Dein Alltag ist voller kleiner Hürden, die zusammen richtig viel Zeit kosten.</div>
+<div class="problem-grid">
+<div class="problem-card fade-in"><h3>WhatsApp-Chaos</h3><p>20 Mütter, 20 Chats. Wichtige Infos irgendwo zwischen Babyfotos und Emojis verschollen.</p></div>
+<div class="problem-card fade-in"><h3>Immer erreichbar</h3><p>Nachrichten um 22 Uhr, Anrufe am Wochenende. Keine klaren Grenzen, keine echte Pause.</p></div>
+<div class="problem-card fade-in"><h3>Zettelwirtschaft</h3><p>Termine im Kalender, auf Post-its und im Kopf. Wochenbett-Doku auf Papier.</p></div>
+<div class="problem-card fade-in"><h3>Dokumente überall</h3><p>Mutterpass im Chat, Befunde per Mail, Rezepte in der Schublade. Nichts an einem Ort.</p></div>
+</div></div></section>
 
-<section class="problem">
-  <div class="container">
-    <div class="section-label">Das Problem</div>
-    <div class="section-title">Als Hebamme kennst du das.</div>
-    <div class="section-subtitle">Dein Alltag ist voller kleiner Hürden, die zusammen richtig viel Zeit kosten.</div>
-    <div class="problem-grid">
-      <div class="problem-card fade-in">
-        <div class="problem-icon">💬</div>
-        <h3>WhatsApp-Chaos</h3>
-        <p>20 Mütter, 20 Chats. Wichtige Infos irgendwo zwischen Babyfotos und Emojis verschollen.</p>
-      </div>
-      <div class="problem-card fade-in">
-        <div class="problem-icon">🔔</div>
-        <h3>Immer erreichbar</h3>
-        <p>Nachrichten um 22 Uhr, Anrufe am Wochenende. Keine klaren Grenzen, keine echte Pause.</p>
-      </div>
-      <div class="problem-card fade-in">
-        <div class="problem-icon">📋</div>
-        <h3>Zettelwirtschaft</h3>
-        <p>Termine im Kalender, auf Post-its und im Kopf. Wochenbett-Doku auf Papier.</p>
-      </div>
-      <div class="problem-card fade-in">
-        <div class="problem-icon">📁</div>
-        <h3>Dokumente überall</h3>
-        <p>Mutterpass im Chat, Befunde per Mail, Rezepte in der Schublade. Nichts an einem Ort.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="app-preview" id="app-preview"><div class="container">
+<div class="section-label">Die App</div>
+<div class="section-title">So sieht HeyJuno aus.</div>
+<div class="section-subtitle" style="margin-left:auto;margin-right:auto;">Entwickelt für den Hebammen-Alltag – klar, aufgeräumt und mobil-optimiert.</div>
+<div class="preview-grid">
+<div class="preview-item fade-in"><div class="phone-frame"><!-- <img src="/images/screen-dashboard.png" alt="HeyJuno Dashboard" loading="lazy"> --><div class="phone-placeholder">Dashboard</div></div><div class="preview-label">Dashboard</div></div>
+<div class="preview-item fade-in"><div class="phone-frame"><!-- <img src="/images/screen-messenger.png" alt="HeyJuno Messenger" loading="lazy"> --><div class="phone-placeholder">Messenger</div></div><div class="preview-label">Messenger</div></div>
+<div class="preview-item fade-in"><div class="phone-frame"><!-- <img src="/images/screen-wochenbett.png" alt="HeyJuno Wochenbett" loading="lazy"> --><div class="phone-placeholder">Wochenbett</div></div><div class="preview-label">Wochenbett</div></div>
+<div class="preview-item fade-in"><div class="phone-frame"><!-- <img src="/images/screen-kalender.png" alt="HeyJuno Kalender" loading="lazy"> --><div class="phone-placeholder">Kalender</div></div><div class="preview-label">Tagesplaner</div></div>
+</div></div></section>
 
-<!-- ═══════════════════════════════════════════
-     APP PREVIEW (Screenshot Placeholders)
-     ═══════════════════════════════════════════ -->
+<section class="features" id="features"><div class="container">
+<div class="section-label">Die Lösung</div>
+<div class="section-title">Alles was du brauchst. In einer App.</div>
+<div class="section-subtitle">Entwickelt mit Hebammen aus der Praxis – für den echten Arbeitsalltag.</div>
+<div class="features-grid">
+<div class="feature-card fade-in"><h3>Sicherer Messenger</h3><p>Ein DSGVO-konformer Kanal für alle Mütter. Bilder, Dateien und Push-Benachrichtigungen – ohne WhatsApp.</p></div>
+<div class="feature-card fade-in"><h3>Abwesenheits-Assistent</h3><p>Im Urlaub? Krank? Setze deinen Status und deine Mütter bekommen automatisch deine Vertretung angezeigt.</p><span class="feature-tag">Killer-Feature</span></div>
+<div class="feature-card fade-in"><h3>Tagesplaner</h3><p>Kalender mit Tages-, Wochen- und Monatsansicht. Mütter bestätigen Termine direkt. Feiertage integriert.</p></div>
+<div class="feature-card fade-in"><h3>Dokument-Management</h3><p>Mutterpass, Befunde, Rezepte – sicher gespeichert. Automatische Aufbewahrungsfristen, Audit-Log inklusive.</p></div>
+<div class="feature-card fade-in"><h3>Mütter-Verwaltung</h3><p>Alle Mütter im Blick: Schwanger, Wochenbett, Abgeschlossen. Einladung per Link, Status auf einen Blick.</p></div>
+<div class="feature-card fade-in"><h3>Zusatzleistungen anbieten</h3><p>Biete Beratungspakete für Leistungen außerhalb der Regelversorgung an – transparent und fair, direkt in der App.</p></div>
+</div></div></section>
 
-<section class="app-preview" id="app-preview">
-  <div class="container">
-    <div class="section-label">Die App</div>
-    <div class="section-title">So sieht HeyJuno aus.</div>
-    <div class="section-subtitle" style="margin-left:auto;margin-right:auto;">Entwickelt für den Hebammen-Alltag – klar, aufgeräumt und mobil-optimiert.</div>
-    <div class="preview-grid">
-      <div class="preview-item fade-in">
-        <div class="phone-frame">
-          <!-- Replace with: <img src="/images/screen-dashboard.png" alt="HeyJuno Dashboard" loading="lazy"> -->
-          <div class="phone-placeholder">
-            <div class="icon">📊</div>
-            Dashboard
-          </div>
-        </div>
-        <div class="preview-label">Dashboard</div>
-      </div>
-      <div class="preview-item fade-in">
-        <div class="phone-frame">
-          <!-- Replace with: <img src="/images/screen-messenger.png" alt="HeyJuno Messenger" loading="lazy"> -->
-          <div class="phone-placeholder">
-            <div class="icon">💬</div>
-            Messenger
-          </div>
-        </div>
-        <div class="preview-label">Messenger</div>
-      </div>
-      <div class="preview-item fade-in">
-        <div class="phone-frame">
-          <!-- Replace with: <img src="/images/screen-wochenbett.png" alt="HeyJuno Wochenbett" loading="lazy"> -->
-          <div class="phone-placeholder">
-            <div class="icon">👶</div>
-            Wochenbett
-          </div>
-        </div>
-        <div class="preview-label">Wochenbett</div>
-      </div>
-      <div class="preview-item fade-in">
-        <div class="phone-frame">
-          <!-- Replace with: <img src="/images/screen-kalender.png" alt="HeyJuno Kalender" loading="lazy"> -->
-          <div class="phone-placeholder">
-            <div class="icon">📅</div>
-            Kalender
-          </div>
-        </div>
-        <div class="preview-label">Tagesplaner</div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="highlight" id="wochenbett"><div class="container">
+<div class="section-label">Einzigartig</div>
+<div class="section-title">Strukturiertes Wochenbett-Management</div>
+<div class="section-subtitle">Baby geboren? Ein Klick – und HeyJuno zeigt dir den kompletten Besuchsplan mit allen 10 empfohlenen Besuchen.</div>
+<div class="highlight-features">
+<div class="highlight-item fade-in"><h3>10 Meilensteine im Blick</h3><p>Alle empfohlenen Wochenbett-Besuche auf einen Blick – mit Empfehlungszeitraum, Fortschrittsanzeige und Dokumentation pro Besuch.</p></div>
+<div class="highlight-item fade-in"><h3>WHO-Gewichtskurven</h3><p>Gewichtsverlauf mit WHO-Perzentilen (P3–P97), geschlechtsspezifisch. Sofort erkennen ob das Baby im Normalbereich liegt.</p></div>
+<div class="highlight-item fade-in"><h3>Intelligente Warnungen</h3><p>Automatische Alerts bei kritischen Werten: Gewichtsverlust, auffällige Befunde, psychische Belastung.</p></div>
+<div class="highlight-item fade-in"><h3>Revisionssichere Doku</h3><p>Jede Änderung wird protokolliert. 10 Jahre Aufbewahrung, 30 Jahre bei Hausgeburten. PDF-Export der kompletten Akte.</p></div>
+<div class="highlight-item fade-in"><h3>Abrechnungs-Export</h3><p>Jeder Besuch mit korrekter Abrechnungsposition nach Hebammengebührenordnung. Wegegeld inklusive.</p></div>
+<div class="highlight-item fade-in"><h3>Dokumentation beim Hausbesuch</h3><p>Strukturierte Formulare direkt auf dem Handy ausfüllen – statt Freitext auf Papier und abends nachtragen.</p></div>
+</div></div></section>
 
-<!-- ═══════════════════════════════════════════
-     FEATURES
-     ═══════════════════════════════════════════ -->
+<section class="how-it-works" id="so-funktionierts"><div class="container">
+<div class="section-label">So einfach geht's</div>
+<div class="section-title">Für dich und deine Mütter.</div>
+<div class="section-subtitle">Deine Mütter brauchen keine App zu installieren – HeyJuno läuft direkt im Browser auf jedem Gerät.</div>
+<div class="steps-grid">
+<div class="step-card fade-in"><div class="step-number">1</div><h3>Registriere dich</h3><p>Kostenlos anmelden und dein Profil einrichten. In 2 Minuten startklar.</p></div>
+<div class="step-card fade-in"><div class="step-number">2</div><h3>Lade Mütter ein</h3><p>Per Link einladen – per WhatsApp, SMS oder E-Mail teilbar.</p></div>
+<div class="step-card fade-in"><div class="step-number">3</div><h3>Mütter öffnen den Link</h3><p>Kurze Registrierung, kein App-Download nötig. Funktioniert auf iPhone, Android und Desktop.</p></div>
+<div class="step-card fade-in"><div class="step-number">4</div><h3>Alles an einem Ort</h3><p>Termine, Nachrichten, Dokumente – sicher und übersichtlich für euch beide.</p></div>
+</div></div></section>
 
-<section class="features" id="features">
-  <div class="container">
-    <div class="section-label">Die Lösung</div>
-    <div class="section-title">Alles was du brauchst. In einer App.</div>
-    <div class="section-subtitle">Entwickelt mit Hebammen aus der Praxis – für den echten Arbeitsalltag.</div>
-    <div class="features-grid">
-      <div class="feature-card fade-in">
-        <div class="feature-icon blue">💬</div>
-        <h3>Sicherer Messenger</h3>
-        <p>Ein DSGVO-konformer Kanal für alle Mütter. Bilder, Dateien und Push-Benachrichtigungen – ohne WhatsApp.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon green">🌙</div>
-        <h3>Abwesenheits-Assistent</h3>
-        <p>Im Urlaub? Krank? Setze deinen Status und deine Mütter bekommen automatisch deine Vertretung angezeigt.</p>
-        <span class="feature-tag">Killer-Feature</span>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon gold">📅</div>
-        <h3>Tagesplaner</h3>
-        <p>Kalender mit Tages-, Wochen- und Monatsansicht. Mütter bestätigen Termine direkt. Feiertage integriert.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon teal">📄</div>
-        <h3>Dokument-Management</h3>
-        <p>Mutterpass, Befunde, Rezepte – sicher gespeichert. Automatische Aufbewahrungsfristen, Audit-Log inklusive.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon blue">👩‍👧</div>
-        <h3>Mütter-Verwaltung</h3>
-        <p>Alle Mütter im Blick: Schwanger, Wochenbett, Abgeschlossen. Einladung per Link, Status auf einen Blick.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon gold">💶</div>
-        <h3>Zusatzleistungen anbieten</h3>
-        <p>Biete Beratungspakete für Leistungen außerhalb der Regelversorgung an – transparent und fair, direkt in der App.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="seals"><div class="container" style="text-align:center"><div class="seals-grid">
+<div class="seal fade-in"><div class="seal-ring"></div><div class="seal-inner"><div class="seal-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h4>DSGVO-konform</h4><p>EU-Server Frankfurt</p></div></div>
+<div class="seal fade-in"><div class="seal-ring"></div><div class="seal-inner"><div class="seal-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>Verschlüsselt</h4><p>Sichere Datenübertragung</p></div></div>
+<div class="seal fade-in"><div class="seal-ring"></div><div class="seal-inner"><div class="seal-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h4>Für Hebammen</h4><p>Aus der Praxis entwickelt</p></div></div>
+<div class="seal fade-in"><div class="seal-ring"></div><div class="seal-inner"><div class="seal-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div><h4>Überall verfügbar</h4><p>iPhone, Android, Desktop</p></div></div>
+<div class="seal fade-in"><div class="seal-ring"></div><div class="seal-inner"><div class="seal-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Made in Germany</h4><p>Deutsche Entwicklung</p></div></div>
+</div></div></section>
 
-<!-- ═══════════════════════════════════════════
-     WOCHENBETT HIGHLIGHT
-     ═══════════════════════════════════════════ -->
-
-<section class="highlight" id="wochenbett">
-  <div class="container">
-    <div class="section-label">Einzigartig</div>
-    <div class="section-title">Strukturiertes Wochenbett-Management</div>
-    <div class="section-subtitle">Baby geboren? Ein Klick – und HeyJuno zeigt dir den kompletten Besuchsplan mit allen 10 empfohlenen Besuchen.</div>
-    <div class="highlight-features">
-      <div class="highlight-item fade-in">
-        <h3>📋 10 Meilensteine im Blick</h3>
-        <p>Alle empfohlenen Wochenbett-Besuche auf einen Blick – mit Empfehlungszeitraum, Fortschrittsanzeige und Dokumentation pro Besuch.</p>
-      </div>
-      <div class="highlight-item fade-in">
-        <h3>📊 WHO-Gewichtskurven</h3>
-        <p>Gewichtsverlauf mit WHO-Perzentilen (P3–P97), geschlechtsspezifisch. Sofort erkennen ob das Baby im Normalbereich liegt.</p>
-      </div>
-      <div class="highlight-item fade-in">
-        <h3>⚠️ Intelligente Warnungen</h3>
-        <p>Automatische Alerts bei kritischen Werten: Gewichtsverlust, auffällige Befunde, psychische Belastung. Das System denkt mit.</p>
-      </div>
-      <div class="highlight-item fade-in">
-        <h3>📝 Revisionssichere Doku</h3>
-        <p>Jede Änderung wird protokolliert. 10 Jahre Aufbewahrung, 30 Jahre bei Hausgeburten. PDF-Export der kompletten Akte.</p>
-      </div>
-      <div class="highlight-item fade-in">
-        <h3>💶 Abrechnungs-Export</h3>
-        <p>Jeder Besuch mit korrekter Abrechnungsposition nach Hebammengebührenordnung. Wegegeld inklusive.</p>
-      </div>
-      <div class="highlight-item fade-in">
-        <h3>📱 Dokumentation beim Hausbesuch</h3>
-        <p>Strukturierte Formulare direkt auf dem Handy ausfüllen – statt Freitext auf Papier und abends nachtragen.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     HOW IT WORKS (Mütter-Portal)
-     ═══════════════════════════════════════════ -->
-
-<section class="how-it-works" id="so-funktionierts">
-  <div class="container">
-    <div class="section-label">So einfach geht's</div>
-    <div class="section-title">Für dich und deine Mütter.</div>
-    <div class="section-subtitle">Deine Mütter brauchen keine App zu installieren – HeyJuno läuft direkt im Browser auf jedem Gerät.</div>
-    <div class="steps-grid">
-      <div class="step-card fade-in">
-        <div class="step-number">1</div>
-        <h3>Registriere dich</h3>
-        <p>Kostenlos anmelden und dein Profil einrichten. In 2 Minuten startklar.</p>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-number">2</div>
-        <h3>Lade Mütter ein</h3>
-        <p>Per Link einladen – per WhatsApp, SMS oder E-Mail teilbar.</p>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-number">3</div>
-        <h3>Mütter öffnen den Link</h3>
-        <p>Kurze Registrierung, kein App-Download nötig. Funktioniert auf iPhone, Android und Desktop.</p>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-number">4</div>
-        <h3>Alles an einem Ort</h3>
-        <p>Termine, Nachrichten, Dokumente – sicher und übersichtlich für euch beide.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     PRICING
-     ═══════════════════════════════════════════ -->
-
-<section class="pricing" id="preis">
-  <div class="container">
-    <div class="section-label">Preis</div>
-    <div class="section-title">Fair und transparent.</div>
-    <div class="price-card">
-      <div class="price-badge">Pilotphase – Jetzt kostenlos</div>
-      <div class="price-amount">19€ <span>/Monat</span></div>
-      <div class="price-period">pro Hebamme · als Betriebsausgabe absetzbar</div>
-      <ul class="price-features">
-        <li>Unbegrenzte Mütter</li>
-        <li>Sicherer Messenger mit Push</li>
-        <li>Tagesplaner &amp; Terminverwaltung</li>
-        <li>Wochenbett-Dokumentation</li>
-        <li>WHO-Gewichtskurven</li>
-        <li>Dokument-Management</li>
-        <li>Abwesenheits-Assistent</li>
-        <li>PDF-Export</li>
-        <li>DSGVO-konform · Server in Frankfurt</li>
-      </ul>
-      <a href="https://app.heyjuno.de" class="btn btn-primary" style="width:100%;justify-content:center;">Kostenlos testen →</a>
-      <p class="price-note">Keine Kreditkarte nötig · Jederzeit kündbar</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     TRUST
-     ═══════════════════════════════════════════ -->
-
-<section class="trust">
-  <div class="container">
-    <div class="trust-grid">
-      <div class="trust-item fade-in">
-        <div class="trust-icon">🔒</div>
-        <h4>DSGVO-konform</h4>
-        <p>EU-Server Frankfurt</p>
-      </div>
-      <div class="trust-item fade-in">
-        <div class="trust-icon">🛡️</div>
-        <h4>Verschlüsselt</h4>
-        <p>Sichere Datenübertragung</p>
-      </div>
-      <div class="trust-item fade-in">
-        <div class="trust-icon">🏥</div>
-        <h4>Für Hebammen</h4>
-        <p>Aus der Praxis entwickelt</p>
-      </div>
-      <div class="trust-item fade-in">
-        <div class="trust-icon">📱</div>
-        <h4>Überall verfügbar</h4>
-        <p>iPhone, Android, Desktop</p>
-      </div>
-      <div class="trust-item fade-in">
-        <div class="trust-icon">🇩🇪</div>
-        <h4>Made in Germany</h4>
-        <p>Deutsche Entwicklung</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     CTA
-     ═══════════════════════════════════════════ -->
+<section class="pricing" id="preis"><div class="container">
+<div class="section-label">Preis</div>
+<div class="section-title">Fair und transparent.</div>
+<div class="price-card">
+<div class="price-badge">Pilotphase – Jetzt kostenlos</div>
+<div class="price-amount">19€ <span>/Monat</span></div>
+<div class="price-period">pro Hebamme · als Betriebsausgabe absetzbar</div>
+<ul class="price-features">
+<li>Unbegrenzte Mütter</li>
+<li>Sicherer Messenger mit Push</li>
+<li>Tagesplaner &amp; Terminverwaltung</li>
+<li>Wochenbett-Dokumentation</li>
+<li>WHO-Gewichtskurven</li>
+<li>Dokument-Management</li>
+<li>Abwesenheits-Assistent</li>
+<li>PDF-Export</li>
+<li>DSGVO-konform · Server in Frankfurt</li>
+</ul>
+<a href="https://app.heyjuno.de" class="btn btn-primary" style="width:100%;justify-content:center;">Kostenlos testen</a>
+<p class="price-note">Keine Kreditkarte nötig · Jederzeit kündbar</p>
+</div></div></section>
 
 <section class="cta-section">
-  <h2>Bereit für weniger Chaos?</h2>
-  <p>Starte jetzt kostenlos und erlebe wie einfach dein Hebammen-Alltag sein kann.</p>
-  <a href="https://app.heyjuno.de" class="btn btn-primary">Jetzt kostenlos starten →</a>
+<h2>Bereit für weniger Chaos?</h2>
+<p>Starte jetzt kostenlos und erlebe wie einfach dein Hebammen-Alltag sein kann.</p>
+<a href="https://app.heyjuno.de" class="btn btn-primary">Jetzt kostenlos starten</a>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════ -->
-
 <footer>
-  <div class="footer-links">
-    <a href="mailto:hallo@heyjuno.de">Kontakt</a>
-    <a href="/impressum">Impressum</a>
-    <a href="/datenschutz">Datenschutz</a>
-  </div>
-  <p>© 2026 HeyJuno · Benannt nach Juno, der römischen Göttin der Geburt.</p>
+<div class="footer-main">
+<div class="footer-col"><h5>HeyJuno</h5><p>Die All-in-One App für<br>freiberufliche Hebammen.</p></div>
+<div class="footer-col"><h5>Produkt</h5><a href="#features">Features</a><a href="#wochenbett">Wochenbett</a><a href="#preis">Preis</a><a href="https://app.heyjuno.de">App öffnen</a></div>
+<div class="footer-col"><h5>Rechtliches</h5><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a href="/agb">AGB</a></div>
+<div class="footer-col"><h5>Kontakt</h5><a href="mailto:hallo@heyjuno.de">hallo@heyjuno.de</a></div>
+</div>
+<div class="footer-bottom"><p>© 2026 HeyJuno · Benannt nach Juno, der römischen Göttin der Geburt.</p></div>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     SCRIPTS
-     ═══════════════════════════════════════════ -->
-
 <script>
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// Intersection Observer for fade-in animations
-const observer = new IntersectionObserver(
-  entries => entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  }),
-  { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-);
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// Mobile menu toggle
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  navToggle.setAttribute('aria-label',
-    navLinks.classList.contains('open') ? 'Menü schließen' : 'Menü öffnen'
-  );
-});
-
-// Close mobile menu on link click
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
-
-// Close mobile menu on click outside
-document.addEventListener('click', (e) => {
-  if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-    navLinks.classList.remove('open');
-  }
-});
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>20)});
+const observer=new IntersectionObserver(e=>e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+const navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');navToggle.addEventListener('click',()=>{navLinks.classList.toggle('open');navToggle.setAttribute('aria-label',navLinks.classList.contains('open')?'Menü schließen':'Menü öffnen')});
+navLinks.querySelectorAll('a').forEach(l=>{l.addEventListener('click',()=>navLinks.classList.remove('open'))});
+document.addEventListener('click',e=>{if(!navToggle.contains(e.target)&&!navLinks.contains(e.target))navLinks.classList.remove('open')});
 </script>
-
 </body>
 </html>
